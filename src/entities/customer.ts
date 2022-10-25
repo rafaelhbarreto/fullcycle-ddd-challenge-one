@@ -1,14 +1,17 @@
+import { Address } from "./address";
+
 export default class Customer 
 {
     private id: string; 
     private name: string; 
-    private address: string; 
+
+    // The address can initialize empty
+    private address!: Address; 
     private active: boolean = true; 
 
-    constructor(id: string, name: string, address: string) {
+    constructor(id: string, name: string) {
         this.id = id; 
-        this.name = name; 
-        this.address = address; 
+        this.name = name;
     }
 
     public changeName(name: string) {
@@ -21,5 +24,9 @@ export default class Customer
 
     public deactivate() {
         this.active = false;
+    }
+
+    public setAddress(address: Address) {
+      this.address = address;
     }
 }
