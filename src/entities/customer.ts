@@ -4,6 +4,7 @@ export default class Customer
 {
     private _id: string; 
     private _name: string; 
+    private _rewardPoints: number = 0; 
 
     // The address can initialize empty
     private _address!: Address; 
@@ -31,8 +32,16 @@ export default class Customer
         this.validate(); 
     }
 
+    get id(): string {
+      return this._id;
+    }
+
     get name(): string {
       return this._name;
+    }
+
+    get rewardPoints(): number {
+      return this._rewardPoints;
     }
 
     public activate() {
@@ -54,5 +63,9 @@ export default class Customer
 
     public setAddress(address: Address) {
       this._address = address;
+    }
+
+    public addRewardPoints(points: number): number {
+      return this._rewardPoints += points;
     }
 }
