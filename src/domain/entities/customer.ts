@@ -44,6 +44,10 @@ export default class Customer
       return this._rewardPoints;
     }
 
+    get address(): Address {
+      return this._address;
+    }
+
     public activate() {
 
       if (this._address === undefined) {
