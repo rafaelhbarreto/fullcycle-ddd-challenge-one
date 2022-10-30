@@ -86,7 +86,7 @@ export default class OrderRepository {
         return new OrderItem(
           item.id,
           item.name,
-          item.price/item.quantity,
+          item.price,
           item.productId,
           item.quantity
         );
