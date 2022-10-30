@@ -65,7 +65,7 @@ export default class Customer
         this._active = false;
     }
 
-    public setAddress(address: Address) {
+    public changeAddress(address: Address) {
       this._address = address;
     }
 

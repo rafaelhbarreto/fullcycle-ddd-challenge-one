@@ -33,7 +33,7 @@ describe("Customer repository test", () => {
 
     const customer = new Customer('123', 'John doe');
     customer.addRewardPoints(20); 
-    customer.setAddress(new Address('rua', 171, '1234567', 'Goiás')); 
+    customer.changeAddress(new Address('rua', 171, '1234567', 'Goiás')); 
 
     await customerRepository.create(customer); 
 
@@ -57,7 +57,7 @@ describe("Customer repository test", () => {
 
     const customer = new Customer('123', 'John doe');
     customer.addRewardPoints(20); 
-    customer.setAddress(new Address('rua', 171, '1234567', 'Goiás')); 
+    customer.changeAddress(new Address('rua', 171, '1234567', 'Goiás')); 
 
     await customerRepository.create(customer); 
 
@@ -86,11 +86,11 @@ describe("Customer repository test", () => {
 
     const customer1 = new Customer('123', 'John doe');
     customer1.addRewardPoints(10); 
-    customer1.setAddress(new Address('rua', 171, '1234567', 'Goiás')); 
+    customer1.changeAddress(new Address('rua', 171, '1234567', 'Goiás')); 
     
     const customer2 = new Customer('1234', 'Doe John');
     customer2.addRewardPoints(20); 
-    customer2.setAddress(new Address('rua', 171, '1234567', 'Goiás')); 
+    customer2.changeAddress(new Address('rua', 171, '1234567', 'Goiás')); 
 
     const customers: Customer[] = [customer1, customer2]; 
 
