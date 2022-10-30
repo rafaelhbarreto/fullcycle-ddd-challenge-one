@@ -81,4 +81,62 @@ describe("Order unit tests", () => {
       ]
     })
   });
+
+  it('should update a order', async () => {
+    const customerRepository = new CustomerRepository(); 
+
+    // create a customer 
+    const customer = new Customer('123', 'John doe'); 
+    customer.changeAddress(new Address('rua',171,'74345555','GO'));
+    await customerRepository.create(customer); 
+
+    // create a product 
+    const productRepository = new ProductRepository();
+    const product = new Product('123', 'product name', 10); 
+    await productRepository.create(product); 
+
+    // create a order item 
+    const orderItem = new OrderItem('123', product.name, product.price, product.id, 2); 
+
+    // create a order 
+    const orderRepository = new OrderRepository(); 
+    const order = new Order('123', customer.id, [orderItem]); 
+
+    await orderRepository.create(order); 
+
+    // update 
+
+    product.changeName('another name'); 
+    product.changePrice(50); 
+
+    const orderItemUpdate = new OrderItem('1234', product.name, product.price, product.id, 3); 
+    const orderUpdate = new Order('123', customer.id, [orderItemUpdate]); 
+    await orderRepository.update(orderUpdate);
+    
+    // find and compare 
+
+    const orderModel = await OrderModel.findOne({
+      where: {id: orderUpdate.id},
+      include: ["items"]
+    });
+
+
+    expect(orderModel.toJSON()).toStrictEqual({
+      id: "123",
+      customerId: customer.id,
+      total: orderUpdate.total(),
+      items: [
+        {
+          id: orderItem.id,
+          name: orderItem.name,
+          price: orderItem.price,
+          quantity: orderItem.quantity,
+          order_id: order.id,
+          productId: orderItem.productId,
+        },
+      ],
+    });
+
+  })
+
 }); 

@@ -21,4 +21,22 @@ export default class OrderRepository {
     })
   }
 
+  public async update(order: Order): Promise<void> {
+    await OrderModel.update({
+      customerId: order.customerId,
+      total: order.total(),
+      items: order.items.map(item => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        productId: item.productId,
+      }))
+    }, {
+      where: {
+        id: order.id
+      },
+    });
+  }
+
 }
